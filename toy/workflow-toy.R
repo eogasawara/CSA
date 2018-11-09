@@ -1,15 +1,12 @@
 library(ggplot2)
-
-setwd("C:/Users/eduar/Dropbox/Aplicativos/ShareLaTeX/2018-10a-ESA-stmotifs-seismic/experiments")
-
-source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/stmotif.R")
+setwd(tempdir())
+source("https://github.com/eogasawara/CSA/raw/master/stmotif.R")
 
 plot.series <- function(series, label_series = "", label_x = "", label_y = "") {
   grf <- ggplot(data=series, ggplot2::aes(x = series$x, y = series$value, colour = series$color, group = 1))
   grf <- grf + scale_colour_identity(series$color) + geom_line() + geom_point(data=series, aes(x = series$x, y = series$value), size=0.5,color='black') + facet_grid(variable ~ ., switch = "y")
   grf <- grf + xlab(label_x)
   grf <- grf + ylab(label_y)
-  #grf <- grf + ggtitle("Motifs in spatial-time series")
   grf <- grf + theme_bw(base_size = 10)
   grf <- grf + theme(panel.grid.major = element_blank()) + theme(panel.grid.minor = element_blank())
   grf <- grf + theme(axis.text.x = element_blank(), axis.text.y = element_blank(), axis.ticks = element_blank())
@@ -45,7 +42,7 @@ prep_plot <- function(dataset, rstmotifs, title="ST", fixcolor=NULL){
   return(data)
 }
 
-load("toy/toydataset.RData")
+load(url("https://github.com/eogasawara/CSA/raw/master/data/toydataset.RData"))
 
 #input toydataset
 w  <- 4 
@@ -60,6 +57,7 @@ D <- STSADatasetAdjust(vectorMatrix, tb, sb)
 DS <- NormSAX(D,a)
 stmotifs_sole <- SearchSTMotifs(D,DS,w,a,sb,tb,si,ka)
 rstmotifs_sole <- RankSTMotifs(stmotifs_sole)
+
 #grafico exportado em 5" x 4.25"
 x <- prep_plot(vectorMatrix, rstmotifs_sole, fixcolor = "green2")
 
