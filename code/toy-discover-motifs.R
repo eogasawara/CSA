@@ -1,5 +1,5 @@
 library(ggplot2)
-source("csa/code/stmotif.R")
+library(STMotif)
 
 plot.series <- function(series, label_series = "", label_x = "", label_y = "") {
   grf <- ggplot(data=series, ggplot2::aes(x = series$x, y = series$value, colour = series$color, group = 1))

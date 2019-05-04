@@ -1,5 +1,6 @@
-library(xlsx)
 source("csa/code/stmotif.R")
+library(xlsx)
+
 mydata <- read.xlsx("csa/data/toydataset.xlsx", "data")
 
 mydata$NA. <- NULL

@@ -75,9 +75,9 @@ library(sparklyr)
 Sys.setenv("SPARK_HOME" = "/usr/local/spark")
 sc <- spark_connect(master = "spark://aldebaran:7077")
 
-#dataset <- wf_discover_motifs_toy(sc)
+dataset <- wf_discover_motifs_toy(sc)
 
-#dataset <- wf_discover_motifs_seismic(sc)
+dataset <- wf_discover_motifs_seismic(sc)
 
 dataset <- wf_analyze_motifs_seismic(sc)
 

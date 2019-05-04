@@ -4,7 +4,7 @@ loadlibrary("reshape")
 loadlibrary("RColorBrewer")
 loadlibrary("gridExtra")
 loadlibrary("dplyr")
-
+loadlibrary("STMotif")
 source("csa/code/stmotif.R")
 
 folder = "/shared/eogasawara/csa/seismic"
@@ -17,31 +17,6 @@ slice_netherlands <- function(t) {
   x <- 15:934
   inline = inline[t, x]
   return(inline)
-}
-
-STSNormalization <- function (vector){
-  return ((vector-mean(vector, na.rm = T))/sd(vector, na.rm = T))
-}
-
-binning <- function(v, alpha) {
-  p <- seq(from = 0, to = 1, by = 1/alpha)
-  q <- quantile(v, p)
-  qf <- matrix(c(q[1:(length(q)-1)],q[2:(length(q))]), ncol=2)
-  vp <- cut(v, q, FALSE, include.lowest=TRUE)
-  m <- tapply(v, vp, mean)
-  vm <- m[vp]
-  mse <- mean( (v - vm)^2, na.rm = TRUE)
-  return (list(binning=m, bins_factor=vp, q=q, qf=qf, bins=vm, mse=mse))
-}
-
-STSSaxEncode <- function(dataset, vector, alpha) {
-  mybin <- binning(vector, alpha)
-  myletters <- letters[1:alpha]
-  saxvector <- myletters[mybin$bins_factor]
-  saxvector = matrix(saxvector, nrow = nrow(dataset), ncol = ncol(dataset))
-  saxvector = data.frame(saxvector)
-  colnames(saxvector) =  colnames(dataset)
-  return(saxvector)
 }
 
 curvature.max <- function(x, y, df=3, do_plot=TRUE) {

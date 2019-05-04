@@ -1,7 +1,6 @@
-source("csa/code/stmotif.R")
-
 discovery_motifs <- function(folder, dataset, w, a, sb, tb, si, ka) {
-  logerr <- ""
+  library(STMotif)
+
   start_time <- Sys.time()
   rstmotifs <- NULL
   motifs <- 0
@@ -26,7 +25,6 @@ discovery_motifs <- function(folder, dataset, w, a, sb, tb, si, ka) {
     }
     executed <- TRUE
   },error=function(e) { 
-    logerr <- e
     executed <- FALSE
   })
   

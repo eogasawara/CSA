@@ -1,12 +1,12 @@
 source("csa/code/stmotif.R")
 
+library(STMotif)
 library(reshape2)
 library(RColorBrewer)
 library(ggplot2)
 library(scales)
 
 folder = "/shared/eogasawara/csa/seismic"
-
 
 D <- get(load(file = "csa/data/t401.RData"))
 dataset<- D
@@ -54,13 +54,13 @@ for (pos in 1:length(motifs)){
   motifs.plot<- rbind(motifs.plot ,data.frame("s"=motifs[[pos]]$vecst$s, "t"=motifs[[pos]]$vecst$t, "g"= pos, "color"=palhetaCores[pos])) 
 }
 
-datasetColor <- merge(datasetColor.Org, motifs.plot, by.x=c('Var1', 'Var2'), by.y=c('s', 't'), all.x = TRUE)
+datasetColor <- merge(datasetColor.Org, motifs.plot, by.x=c('X1', 'X2'), by.y=c('s', 't'), all.x = TRUE)
 datasetColor$motif[!is.na(datasetColor$g)] <- TRUE
 datasetColor$g <- NULL
 datasetColor$color <- as.character(datasetColor$color)
 
 p <- NULL
-p <- ggplot(data=datasetColor, aes(x=datasetColor$Var1, y=datasetColor$Var2, fill=datasetColor$value, color=datasetColor$color)) 
+p <- ggplot(data=datasetColor, aes(x=datasetColor$X1, y=datasetColor$X2, fill=datasetColor$value, color=datasetColor$color)) 
 p <-  p + geom_raster() 
 p <-  p + scale_fill_gradientn(colours = c("white","dimgrey"), values = scales::rescale(1:alpha), limits=c(1,alpha))  
 p <-  p + theme_bw() + xlab("Space") + ylab("Time") + scale_y_reverse()
