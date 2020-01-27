@@ -429,7 +429,7 @@ rank <- function(dataRank,stmotifs)
 
 
 ##### visualization
-display_motifsSTSeries <- function (dataset, rstmotifs,space = c(1:length(dataset))){
+display_motifsSTSeries <- function (dataset, rstmotifs,space = c(1:length(dataset)),color=NULL){
   dataset <- as.data.frame(dataset)
   colnames(dataset) <- paste("",1:length(dataset), sep = "")
 
