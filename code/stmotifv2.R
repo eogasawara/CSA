@@ -491,5 +491,5 @@ display_motifsDataset <- function(dataset,rstmotifs,alpha,color=NULL){
     scale_fill_gradientn(colours = c("white","dimgrey"), values = scales::rescale(1:alpha), limits=c(1,alpha)) +
     theme_bw() + ggtitle("") + xlab("Space") + ylab("Time") + scale_y_reverse() +
     guides(fill=FALSE, color=FALSE) +
-    geom_point(colour = ifelse(datasetColor$motif,datasetColor$color,NA), size = 5, shape=15, show.legend = FALSE)
+    geom_point(colour = ifelse(datasetColor$motif,datasetColor$color,NA), size = 4, shape=15, show.legend = FALSE)
 }
