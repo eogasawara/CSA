@@ -442,7 +442,10 @@ display_motifsSTSeries <- function (dataset, rstmotifs,space = c(1:length(datase
 
 
   if (!(is.null(rstmotifs)||length(rstmotifs)==0)){
-    palhetaCores <- brewer.pal(length(rstmotifs), 'Spectral')
+    palhetaCores <- color
+    if (is.null(color)){
+      palhetaCores <- brewer.pal(length(rstmotifs), 'Spectral')
+    }
     levels(data$color) <- c("black", palhetaCores)
 
     size_motif <- nchar(rstmotifs[[1]]$isaxcod)
