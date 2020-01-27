@@ -461,7 +461,7 @@ display_motifsSTSeries <- function (dataset, rstmotifs,space = c(1:length(datase
 }
 
 
-display_motifsDataset <- function(dataset,rstmotifs,alpha,color=0){
+display_motifsDataset <- function(dataset,rstmotifs,alpha,color=NULL){
   colorEncode <- 1:alpha
   datasetColor.Org <- as.matrix(dataset)
   datasetColor.Org <- as.vector(datasetColor.Org)
@@ -472,10 +472,9 @@ display_motifsDataset <- function(dataset,rstmotifs,alpha,color=0){
   datasetColor.Org <- melt(datasetColor.Org)
   datasetColor.Org$motif <- FALSE
 
-  palhetaCores <- brewer.pal(length(rstmotifs), 'Spectral')
-  if (color>0){
-    palhetaCores <- palhetaCores <- brewer.pal(3, 'Spectral')
-    palhetaCores <- palhetaCores[color]
+  palhetaCores <- color
+  if (is.null(color)){
+    palhetaCores <- brewer.pal(length(rstmotifs), 'Spectral')
   }
 
   motifs.plot <-data.frame("s"=NULL, "t"=NULL, "g"= NULL)
