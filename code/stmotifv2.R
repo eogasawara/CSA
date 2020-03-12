@@ -487,7 +487,7 @@ display_motifsDataset <- function(dataset,rstmotifs,alpha,color=NULL){
   datasetColor$g <- NULL
   datasetColor$color <- as.character(datasetColor$color)
 
-  ggplot(data=datasetColor, aes(x=datasetColor$Var1, y=datasetColor$Var2, fill=datasetColor$value, color=datasetColor$color))   + geom_raster() +
+  ggplot(data=datasetColor, aes(x=Var1, y=Var2, fill=datasetColor$value, color=datasetColor$color))   + geom_raster() +
     scale_fill_gradientn(colours = c("white","dimgrey"), values = scales::rescale(1:alpha), limits=c(1,alpha)) +
     theme_bw() + ggtitle("") + xlab("Space") + ylab("Time") + scale_y_reverse() +
     guides(fill=FALSE, color=FALSE) +
